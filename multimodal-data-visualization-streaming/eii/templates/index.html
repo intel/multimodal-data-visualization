@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<title>EdgeInsights - Grafana Visualizer</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'nonce-{{ nonce }}';style-src 'self' 'nonce-{{ nonce }}';">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" nonce={{nonce}}>
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}" nonce={{nonce}}></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" nonce={{nonce}}></script>
+<style nonce={{nonce}}>
+.modal-full {min-width: 100%;margin: 10;}
+.modal-full .modal-content {min-height: 100vh;}
+.imagepreview { max-width: 100%;max-height: 100%;}
+</style>
+<script nonce={{nonce}}>
+    topics_list = []
+    var imgId = 0;
+    $.get("/topics",
+      function(data){
+        data = data.replace(/[^0-9a-zA-Z_\.,]/g, "")
+        if (data.includes(",")) {
+          topics_list = data.split(",")
+        } else {
+          topics_list.push(data)
+        }
+        // alert(topics_list)
+        var mainDiv = $("#main");        
+        for (i = 0; i < topics_list.length; i++) {
+          var imgTag = $("<div class='col-md-4'>\
+                        <img id='myImg-"+imgId+"'\
+                        src='/"+topics_list[i]+"'\
+                        alt='"+topics_list[i]+"' class='img-rounded'\
+                        width='300'></img>\
+                        <br><center><label>"+topics_list[i]+"</label></center></div>")
+          mainDiv.append(imgTag)
+          imgId++;
+        }
+  
+      $(function() {
+        $('img').on('click', function() {
+          var selected = $(this).attr('id')
+          $('.imagepreview').attr('src', $("#"+selected).attr('src'));
+          $('#imagemodal').modal('show');
+        })
+      });
+    });
+  </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">EII Edge Visualizer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>      
+      <ul class="nav navbar-nav navbar-right">
+          <li><a class="btn btn-outline-success my-2 my-sm-0" href="/logout">Log Out</a></li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+<br><br><br>
+<div class="row" id="main">
+
+</div>
+
+
+</div>
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-full">
+      <div class="modal-content">        
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	  <img src="" class="imagepreview" > 
+        </div>
+      </div>
+</div>
+
+</body>

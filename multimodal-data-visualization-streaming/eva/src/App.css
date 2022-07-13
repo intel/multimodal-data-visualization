@@ -1,0 +1,50 @@
+.card {
+	padding: 0px;
+	margin: 10px;
+	border: 1px solid #cecece;
+}
+
+.stream_card_lg {
+	height: 500px;
+	width: 100%;
+	border-top: 1px solid #cecece;
+	border-right: 0px;
+	border-left: 0px;
+	border-bottom: 0px;
+}
+.stream_card_md {
+	height: 300px;
+	width: 100%;
+	border-top: 1px solid #cecece;
+	border-right: 0px;
+	border-left: 0px;
+	border-bottom: 0px;
+}
+.stream_card_sm {
+	height: 250px;
+	width: 100%;
+	border-top: 1px solid #cecece;
+	border-right: 0px;
+	border-left: 0px;
+	border-bottom: 0px;
+}
+
+.stream_card_heading {
+	color: #0068b5;
+	text-align: center;
+	text-transform: capitalize;
+	padding: 8px !important;
+}
+
+.MuiCardContent-root {
+	padding: 0px !important;
+}
+
+.videoDiv {
+	margin-top: 25px;
+}
+
+.reload_button {
+	min-width: 100px;
+	min-height: 50px;
+}
