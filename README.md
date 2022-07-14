@@ -1,6 +1,6 @@
 ## Multimodal Data Visualization Microservice
 
-This repository contains the source code for Multimodal Data Visualization Microservice used for the [Video Analytics Use Case](https://www.intel.com/content/www/us/en/developer/articles/technical/video-analytics-service.html).
+This repository contains the source code for Multimodal Data Visualization Microservice used for the [Multimodal Data Visualization Use Case](https://www.intel.com/content/www/us/en/developer/articles/technical/multimodal-data-visualization.html).
 
 ### Build the base image
 
@@ -16,8 +16,8 @@ Complete the following steps to build the base image:
 
 Complete the following steps to run the base image:
 
-1. Clone this [repo](https://github.com/intel-innersource/applications.services.esh.visualization-microservice).
-2. Configure Host IP 'export HOST_IP=<HOST-IP-address>'
+1. Clone this [repo](https://github.com/intel/multimodal-data-visualization).
+2. Configure Host IP 'export HOST_IP=< HOST-IP-address >'
 3. Run the `docker-compose up` command.
 
 ### Perform the following steps to run Grafana in EVAM mode:
