@@ -15,19 +15,30 @@ import ReplayIcon from '@mui/icons-material/Replay';
 function Visualization() {
 	const [runnningPipeline, setRunnningPipeline] = useState([]);
 	const [noPipelineRunningError, setNoPipelineRunningError] = useState(false);
-	const [baseUrl, setBaseUrl] = useState(
-		`http://${window.location.hostname}:8080/`
-	);
-	const [runningPipelineUrl, setRunningPipelineUrl] = useState(
-		`http://${window.location.hostname}:8082/`
-	);
+	const [baseUrl, setBaseUrl] = useState(`http://${window.location.hostname}:8080/`);
+	const [runningPipelineUrl, setRunningPipelineUrl] = useState(`http://${window.location.hostname}:8082/`);
 
 	useEffect(() => {
-		getRunningPipelines();
+		axios
+			.get(`${baseUrl}pipelines/status`)
+			.then((response) => {
+				console.log("success");
+				getRunningPipelines();
+			})
+			.catch((error) => {
+				setBaseUrl(`http://${window.location.hostname}:30007/`);
+                                setRunningPipelineUrl(`http://${window.location.hostname}:30009/`);
+				getRunningPipelines();
+			});
 		return () => {
 			setRunnningPipeline([]);
 		};
 	}, []);
+
+        useEffect(() => {
+		    setBaseUrl(baseUrl);
+            	    setRunningPipelineUrl(runningPipelineUrl);
+        }, [baseUrl, runningPipelineUrl]);
 
 	// get running pipeline state
 	const getRunningPipelines = () => {

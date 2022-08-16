@@ -286,6 +286,11 @@ def update_dashboard(mode):
         data = f.read().decode()
         if os.environ['HOST_IP'] != "":
             data = data.replace('127.0.0.1', os.environ['HOST_IP'])
+            kubernetes_env = os.getenv("KUBERNETES_ENV", 'false')
+            if kubernetes_env == "true":
+                data = data.replace('8080', '30007') 
+                data = data.replace('8083', '30008')
+                data = data.replace('8082', '30009')
     with open(DASHBOARD_DEST, "w") as f:
         f.write(data)
 

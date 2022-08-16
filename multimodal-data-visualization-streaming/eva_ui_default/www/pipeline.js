@@ -4,9 +4,9 @@
 * SPDX-License-Identifier: BSD-3-Clause
 */
 
-var g_pipeline_server_host=window.location.hostname
-var g_pipeline_server_port=8080
-var PIPELINE_SERVER = "http://" + g_pipeline_server_host + ':' + g_pipeline_server_port;
+var g_pipeline_server_host=window.location.hostname;
+var g_pipeline_server_port=8080;
+var PIPELINE_SERVER = "http://" + g_pipeline_server_host + ':' + g_pipeline_server_port; 
 var VIDEO_INPUT = ["https://github.com/intel-iot-devkit/sample-videos/raw/master/person-bicycle-car-detection.mp4",
                    "https://github.com/intel-iot-devkit/sample-videos/raw/master/face-demographics-walking-and-pause.mp4",
                    "https://github.com/intel-iot-devkit/sample-videos/raw/master/car-detection.mp4",
@@ -25,6 +25,26 @@ var g_sync_playback = true;
 var g_poll_status = true;
 var g_initialized_expando = false;
 var g_grafana_dashboard_manual_launch = false;
+
+
+window.addEventListener('load', (event) => {
+            fetch(window.location.hostname + ":8080/pipelines/status", {
+                            method: 'GET',
+                                })
+                .then((response) => response.json())
+                .then((data) => {
+                                    console.log('Success');
+                                    g_pipeline_server_port = 8080;
+				    PIPELINE_SERVER = "http://" + g_pipeline_server_host + ':' + g_pipeline_server_port;
+
+                                })
+                .catch((error) => {
+                                    console.error('Error:', error);
+                                    g_pipeline_server_port = 30007;
+				    PIPELINE_SERVER = "http://" + g_pipeline_server_host + ':' + g_pipeline_server_port;
+                                });
+});
+
 
 function initExpando(classname) {
     if (!g_initialized_expando) {
@@ -49,6 +69,7 @@ function initExpando(classname) {
         g_initialized_expando = true;
     }
 }
+
 
 function restReq(verb, route, body, callback) {
     var request = new XMLHttpRequest();
