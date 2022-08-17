@@ -41,6 +41,24 @@ var local_stream_promise;
 var statsTimer;
 var statsTimerPipelineStatus;
 
+
+window.addEventListener('load', (event) => {
+	    fetch(window.location.hostname + ":8080/pipelines/status", {
+		            method: 'GET',
+			        })
+	        .then((response) => response.json())
+	        .then((data) => {
+			            console.log('Success');
+			            ws_port = 8443;
+			            
+			        })
+	        .catch((error) => {
+			            console.error('Error:', error);
+			            ws_port = 30006;
+			        });
+});
+
+
 function setConnectButtonState(value) {
     document.getElementById("peer-connect-button").value = value;
     if (value == "Visualize") {
@@ -344,7 +362,7 @@ function websocketServerConnect() {
         autoPlayVideo.play();
     }
     autoPlayVideo.scrollIntoView(false);
-
+    
     var ws_url = 'ws://' + ws_server + ':' + ws_port;
     setStatus("Connecting to server " + ws_url);
     ws_conn = new WebSocket(ws_url);
