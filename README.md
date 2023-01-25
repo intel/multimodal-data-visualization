@@ -1,8 +1,3 @@
-# DISCONTINUATION OF PROJECT #
-This project will no longer be maintained by Intel.
-This project has been identified as having known security escapes.
-Intel has ceased development and contributions including, but not limited to, maintenance, bug fixes, new releases, or updates, to this project.
-Intel no longer accepts patches to this project.
 ## Multimodal Data Visualization Microservice
 
 This repository contains the source code for Multimodal Data Visualization Microservice used for the [Multimodal Data Visualization Use Case](https://www.intel.com/content/www/us/en/developer/articles/technical/multimodal-data-visualization.html).
