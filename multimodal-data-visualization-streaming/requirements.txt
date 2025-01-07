@@ -1,6 +1,0 @@
-flask==2.3.2
-gunicorn==20.1.0
-opencv-python==4.5.5.62
-websockets == 10.1
-eii-messagebus==3.0
-eii-configmanager==3.0
